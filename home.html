@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en" data-auth-guard="required">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#070b1e" />
+  <title>Grammino — All language tools in one place</title>
+  <meta name="description" content="Grammino: Grammar AI, Translator, Speaking AI, Writing AI — all in one place." />
+  <link rel="stylesheet" href="assets/css/home.css" />
+  <link rel="stylesheet" href="assets/css/themes.css" />
+  <link rel="stylesheet" href="assets/css/tools/grammar.css" />
+  <link rel="stylesheet" href="assets/css/tools/translator.css" />
+  <link rel="stylesheet" href="assets/css/tools/writing.css" />
+  <link rel="stylesheet" href="assets/css/tools/settings.css" />
+  <link rel="icon" href="assets/img/logo.png" />
+  <!-- Settings applies theme/lang BEFORE first paint -->
+  <script src="assets/js/settings.js"></script>
+</head>
+<body class="app">
+
+  <!-- Animated liquid background -->
+  <div class="bg" aria-hidden="true">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+  </div>
+
+  <!-- Mobile top bar (visible <=900px) -->
+  <header class="mobile-topbar" aria-hidden="false">
+    <button class="mt-menu" id="mt-menu" type="button" aria-label="Open menu">
+      <span class="mt-menu-icon" aria-hidden="true">
+        <i></i><i></i><i></i>
+      </span>
+    </button>
+    <div class="mt-brand">
+      <img src="assets/img/logo.png" alt="Grammino" />
+    </div>
+  </header>
+
+  <div class="layout" id="layout">
+
+    <!-- Floating reopen button (desktop, visible when sidebar is closed) -->
+    <button class="desktop-menu" id="desktop-menu-btn" type="button" aria-label="Open menu">
+      <span class="mt-menu-icon" aria-hidden="true"><i></i><i></i><i></i></span>
+    </button>
+
+    <!-- Drawer backdrop (mobile) -->
+    <div class="drawer-backdrop" id="drawer-backdrop" aria-hidden="true"></div>
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-head">
+        <button class="hamburger" id="menu-btn" aria-label="Toggle menu" aria-expanded="true">
+          <span></span><span></span><span></span>
+        </button>
+        <div class="brand-mini">
+          <img src="assets/img/logo.png" alt="Grammino" class="brand-logo" />
+        </div>
+      </div>
+
+      <nav class="sidebar-nav" aria-label="Tools">
+        <button class="tool-link" data-tool="grammar">
+          <span class="tool-ico ico-grammar">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 20V6a2 2 0 0 1 2-2h9l5 5v11a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"/>
+              <path d="M14 4v5h5"/>
+              <path d="M8 13h8M8 17h5"/>
+            </svg>
+          </span>
+          <span class="tool-text">
+            <span class="tool-name" data-i18n="grammar">Grammar AI</span>
+            <span class="tool-desc" data-i18n="grammar_desc">Fix grammar &amp; spelling</span>
+          </span>
+        </button>
+
+        <button class="tool-link" data-tool="translator">
+          <span class="tool-ico ico-translator">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 5h10M9 3v2M6 5c0 5 4 8 9 8"/>
+              <path d="M5 13c3 0 6-2 8-5"/>
+              <path d="M13 21l4-9 4 9M14.5 18h5"/>
+            </svg>
+          </span>
+          <span class="tool-text">
+            <span class="tool-name" data-i18n="translator">Translator</span>
+            <span class="tool-desc" data-i18n="translator_desc">100+ languages</span>
+          </span>
+        </button>
+
+        <button class="tool-link" data-tool="speaking">
+          <span class="tool-ico ico-speaking">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="9" y="3" width="6" height="12" rx="3"/>
+              <path d="M5 11a7 7 0 0 0 14 0"/>
+              <path d="M12 18v3M8 21h8"/>
+            </svg>
+          </span>
+          <span class="tool-text">
+            <span class="tool-name" data-i18n="speaking">Speaking AI</span>
+            <span class="tool-desc" data-i18n="speaking_desc">Practice pronunciation</span>
+          </span>
+        </button>
+
+        <button class="tool-link" data-tool="writing">
+          <span class="tool-ico ico-writing">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 20h9"/>
+              <path d="M16.5 3.5a2.1 2.1 0 1 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/>
+            </svg>
+          </span>
+          <span class="tool-text">
+            <span class="tool-name" data-i18n="writing">Writing AI</span>
+            <span class="tool-desc" data-i18n="writing_desc">Essays, emails &amp; more</span>
+          </span>
+        </button>
+
+        <div class="sidebar-divider"></div>
+
+        <button class="tool-link" data-tool="settings">
+          <span class="tool-ico ico-settings">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="3"/>
+              <path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 0 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 0 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 0 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 0 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/>
+            </svg>
+          </span>
+          <span class="tool-text">
+            <span class="tool-name" data-i18n="settings">Settings</span>
+            <span class="tool-desc">Theme · Font · Language</span>
+          </span>
+        </button>
+      </nav>
+
+      <div class="sidebar-foot">
+        <button type="button" id="signout-btn" class="foot-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+            <path d="M16 17l5-5-5-5M21 12H9"/>
+          </svg>
+          <span data-i18n="signout">Sign out</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main -->
+    <main class="main" id="main">
+
+      <!-- Home (modernized welcome) -->
+      <section class="page page-home active" data-page="home">
+        <div class="welcome">
+          <p class="welcome-greet" id="welcome-greet">Good day</p>
+          <h1 class="gm-wordmark" aria-label="Grammino">
+            <span>G</span><span>r</span><span>a</span><span>m</span><span>m</span><span>i</span><span>n</span><span>o</span>
+          </h1>
+          <p class="welcome-sub" data-i18n="tagline">All in one English tools app</p>
+
+          <div class="welcome-chips">
+            <span class="welcome-chip">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2 5 5 2-5 2-2 5-2-5-5-2 5-2z"/></svg>
+              <span data-i18n="chip_ai">AI-Powered</span>
+            </span>
+            <span class="welcome-chip">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg>
+              <span data-i18n="chip_langs">35+ Languages</span>
+            </span>
+            <span class="welcome-chip">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg>
+              <span data-i18n="chip_voice">Voice Enabled</span>
+            </span>
+            <span class="welcome-chip">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 1 1 8 0v3"/></svg>
+              <span data-i18n="chip_private">Private &amp; Fast</span>
+            </span>
+          </div>
+
+          <p class="welcome-hint" data-i18n="welcome_hint">Open the menu to choose a tool</p>
+        </div>
+      </section>
+
+      <!-- Grammar AI (chat) -->
+      <section class="page page-chat" data-page="grammar">
+        <div class="page-head">
+          <div class="page-ico ico-grammar">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 20V6a2 2 0 0 1 2-2h9l5 5v11a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"/>
+              <path d="M14 4v5h5"/>
+              <path d="M8 13h8M8 17h5"/>
+            </svg>
+          </div>
+          <div class="page-head-text">
+            <h2 data-i18n="grammar">Grammar AI</h2>
+            <p>Your personal grammar teacher — ask anything or paste text to check.</p>
+          </div>
+          <button class="chat-new" id="gm-new" type="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 5v14M5 12h14"/>
+            </svg>
+            <span>New chat</span>
+          </button>
+        </div>
+
+        <div class="chat-wrap">
+          <div id="gm-messages" class="chat-messages" aria-live="polite">
+            <div class="chat-empty">
+              <div class="chat-empty-ico">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M4 20V6a2 2 0 0 1 2-2h9l5 5v11a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"/>
+                  <path d="M14 4v5h5"/><path d="M8 13h8M8 17h5"/>
+                </svg>
+              </div>
+              <h3>Grammar AI is ready.</h3>
+              <p>Paste a sentence for a deep grammar check, or ask any grammar rule.</p>
+              <div class="chat-suggest">
+                <button class="sug" data-sug="Check this sentence and explain every mistake with the grammar rules: 'She don't likes coffee and me neither.'">Check a sentence</button>
+                <button class="sug" data-sug="Explain the difference between 'affect' and 'effect' with clear examples.">Affect vs. effect</button>
+                <button class="sug" data-sug="What is subject-verb agreement? Give me 3 examples with correct and incorrect versions.">Subject-verb agreement</button>
+                <button class="sug" data-sug="Teach me when to use the Present Perfect vs. Past Simple tense, with rules and examples.">Present Perfect vs Past Simple</button>
+              </div>
+            </div>
+          </div>
+
+          <form id="gm-form" class="chat-input">
+            <textarea id="gm-text" class="chat-text" rows="1" placeholder="Ask a grammar question, or paste text to check…" required></textarea>
+            <button id="gm-send" class="chat-send" type="submit" title="Send">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 2 11 13"/>
+                <path d="M22 2l-7 20-4-9-9-4 20-7z"/>
+              </svg>
+            </button>
+          </form>
+          <p class="chat-hint">Press <kbd>Enter</kbd> to send · <kbd>Shift</kbd>+<kbd>Enter</kbd> for new line</p>
+        </div>
+      </section>
+
+      <!-- Translator -->
+      <section class="page" data-page="translator">
+        <div class="page-head">
+          <div class="page-ico ico-translator">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 5h10M9 3v2M6 5c0 5 4 8 9 8"/>
+              <path d="M5 13c3 0 6-2 8-5"/>
+              <path d="M13 21l4-9 4 9M14.5 18h5"/>
+            </svg>
+          </div>
+          <div>
+            <h2 data-i18n="translator">Translator</h2>
+            <p>Translate across 35+ languages with voice &amp; definitions.</p>
+          </div>
+        </div>
+        <div class="page-body">
+          <div class="tr-bar">
+            <select id="tr-from" class="tr-select" aria-label="From language"></select>
+            <button id="tr-swap" class="tr-swap" type="button" aria-label="Swap languages">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M7 4v16M7 20l-3-3M7 20l3-3"/>
+                <path d="M17 20V4M17 4l-3 3M17 4l3 3"/>
+              </svg>
+            </button>
+            <select id="tr-to" class="tr-select" aria-label="To language"></select>
+          </div>
+
+          <div class="tr-grid">
+            <div class="tr-pane">
+              <textarea id="tr-source" class="tool-input tr-input" placeholder="Type or paste text to translate…" maxlength="1500"></textarea>
+              <div class="tr-actions">
+                <button class="tr-icon-btn" id="tr-mic" type="button" title="Voice input">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="9" y="3" width="6" height="12" rx="3"/>
+                    <path d="M5 11a7 7 0 0 0 14 0"/>
+                    <path d="M12 18v3M8 21h8"/>
+                  </svg>
+                </button>
+                <button class="tr-icon-btn" id="tr-speak-src" type="button" title="Listen">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M11 5 6 9H2v6h4l5 4z"/>
+                    <path d="M15.5 8.5a5 5 0 0 1 0 7M19 5a9 9 0 0 1 0 14"/>
+                  </svg>
+                </button>
+                <span class="tr-count"><span id="tr-count">0</span>/1500</span>
+              </div>
+            </div>
+
+            <div class="tr-pane">
+              <div id="tr-target" class="tool-input tr-output" aria-live="polite" tabindex="0">
+                <span class="tr-placeholder">Translation will appear here…</span>
+              </div>
+              <div class="tr-actions">
+                <button class="tr-icon-btn" id="tr-speak-tgt" type="button" title="Listen">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M11 5 6 9H2v6h4l5 4z"/>
+                    <path d="M15.5 8.5a5 5 0 0 1 0 7M19 5a9 9 0 0 1 0 14"/>
+                  </svg>
+                </button>
+                <button class="tr-icon-btn" id="tr-copy" type="button" title="Copy">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="9" y="9" width="12" height="12" rx="2"/>
+                    <path d="M5 15V5a2 2 0 0 1 2-2h10"/>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <button id="tr-go" class="tool-cta">Translate</button>
+
+          <div id="tr-def-wrap" class="tr-def" hidden>
+            <div class="tr-def-head">
+              <h3>Definition</h3>
+              <span id="tr-def-word" class="tr-def-word"></span>
+              <span id="tr-def-phon" class="tr-def-phon"></span>
+              <button id="tr-def-speak" class="tr-icon-btn" type="button" title="Pronounce">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M11 5 6 9H2v6h4l5 4z"/>
+                  <path d="M15.5 8.5a5 5 0 0 1 0 7M19 5a9 9 0 0 1 0 14"/>
+                </svg>
+              </button>
+            </div>
+            <div id="tr-def-body" class="tr-def-body"></div>
+          </div>
+
+          <p id="tr-status" class="tr-status" aria-live="polite"></p>
+        </div>
+      </section>
+
+      <!-- Speaking AI -->
+      <section class="page" data-page="speaking">
+        <div class="page-head">
+          <div class="page-ico ico-speaking">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="9" y="3" width="6" height="12" rx="3"/>
+              <path d="M5 11a7 7 0 0 0 14 0"/>
+              <path d="M12 18v3M8 21h8"/>
+            </svg>
+          </div>
+          <div>
+            <h2 data-i18n="speaking">Speaking AI</h2>
+            <p>Practice pronunciation with AI feedback.</p>
+          </div>
+        </div>
+        <div class="page-body">
+          <button class="tool-cta big">🎙 Start speaking</button>
+        </div>
+      </section>
+
+      <!-- Writing AI — IELTS evaluator -->
+      <section class="page" data-page="writing">
+        <div class="page-head">
+          <div class="page-ico ico-writing">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 20h9"/>
+              <path d="M16.5 3.5a2.1 2.1 0 1 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/>
+            </svg>
+          </div>
+          <div>
+            <h2 data-i18n="writing">Writing AI</h2>
+            <p>Write your essay — get IELTS band, errors &amp; personalised feedback.</p>
+          </div>
+        </div>
+
+        <div class="page-body wr-wrap">
+          <!-- Task type -->
+          <div class="wr-types" id="wr-types" role="tablist" aria-label="Task type">
+            <button class="wr-type active" type="button" data-type="task2">Task 2 · Essay</button>
+            <button class="wr-type" type="button" data-type="task1a">Task 1 · Academic</button>
+            <button class="wr-type" type="button" data-type="task1g">Task 1 · General</button>
+            <button class="wr-type" type="button" data-type="free">Free writing</button>
+          </div>
+
+          <!-- Optional prompt -->
+          <textarea id="wr-prompt" class="wr-prompt"
+            placeholder="Topic / question (optional) — e.g. 'Some people think universities should focus only on job-related skills…'"></textarea>
+
+          <!-- User's writing -->
+          <textarea id="wr-text" class="tool-input wr-text"
+            placeholder="Paste or type your writing here…"></textarea>
+
+          <!-- Counter + Evaluate -->
+          <div class="wr-bar">
+            <span class="wr-count" id="wr-count">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h16M4 18h10"/></svg>
+              <span><strong id="wr-count-val">0</strong> words <span id="wr-count-tgt">/ 250</span></span>
+            </span>
+            <button id="wr-go" class="wr-go" type="button">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2l2 5 5 2-5 2-2 5-2-5-5-2 5-2z"/>
+              </svg>
+              <span>Baholash</span>
+            </button>
+          </div>
+          <p class="wr-status" id="wr-status" aria-live="polite"></p>
+
+          <!-- Results -->
+          <div class="wr-results" id="wr-results" aria-live="polite"></div>
+        </div>
+      </section>
+
+      <!-- Settings -->
+      <section class="page" data-page="settings">
+        <div class="page-head">
+          <div class="page-ico ico-settings" style="background: linear-gradient(135deg, var(--accent-a), var(--accent-b));">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="3"/>
+              <path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 0 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 0 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 0 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 0 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/>
+            </svg>
+          </div>
+          <div>
+            <h2 data-i18n="set_title">Settings</h2>
+            <p data-i18n="set_desc">Customize Grammino to your taste.</p>
+          </div>
+        </div>
+
+        <div class="page-body set-grid">
+
+          <!-- Appearance -->
+          <div class="set-card">
+            <div class="set-card-head">
+              <div class="ico">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="5"/><path d="M12 1v3M12 20v3M1 12h3M20 12h3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/>
+                </svg>
+              </div>
+              <h3 data-i18n="sec_appearance">Appearance</h3>
+            </div>
+
+            <div class="set-item">
+              <span class="set-item-label" data-i18n="opt_theme">Theme</span>
+              <div class="seg" data-seg="theme">
+                <button data-val="dark"  data-i18n="opt_theme_dark">Dark</button>
+                <button data-val="light" data-i18n="opt_theme_light">Light</button>
+                <button data-val="auto"  data-i18n="opt_theme_auto">Auto</button>
+              </div>
+            </div>
+
+            <div class="set-item">
+              <span class="set-item-label" data-i18n="opt_accent">Accent color</span>
+              <div class="swatches">
+                <button class="swatch sw-blue"    data-val="blue"    aria-label="Blue"></button>
+                <button class="swatch sw-violet"  data-val="violet"  aria-label="Violet"></button>
+                <button class="swatch sw-cyan"    data-val="cyan"    aria-label="Cyan"></button>
+                <button class="swatch sw-pink"    data-val="pink"    aria-label="Pink"></button>
+                <button class="swatch sw-emerald" data-val="emerald" aria-label="Emerald"></button>
+              </div>
+            </div>
+
+            <div class="set-item">
+              <span class="set-item-label" data-i18n="opt_fontsize">Font size</span>
+              <div class="seg" data-seg="fontSize">
+                <button data-val="sm" data-i18n="opt_fs_sm">Small</button>
+                <button data-val="md" data-i18n="opt_fs_md">Medium</button>
+                <button data-val="lg" data-i18n="opt_fs_lg">Large</button>
+                <button data-val="xl" data-i18n="opt_fs_xl">Extra Large</button>
+              </div>
+            </div>
+
+            <div class="set-item">
+              <span class="set-item-label" data-i18n="opt_motion">Animations</span>
+              <div class="seg" data-seg="motion">
+                <button data-val="full"    data-i18n="opt_motion_full">Full</button>
+                <button data-val="reduced" data-i18n="opt_motion_reduced">Reduced</button>
+              </div>
+            </div>
+
+            <div class="set-item">
+              <span class="set-item-label" data-i18n="opt_density">Density</span>
+              <div class="seg" data-seg="density">
+                <button data-val="cozy"    data-i18n="opt_density_cozy">Cozy</button>
+                <button data-val="compact" data-i18n="opt_density_compact">Compact</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Language -->
+          <div class="set-card">
+            <div class="set-card-head">
+              <div class="ico">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M4 5h10M9 3v2M6 5c0 5 4 8 9 8"/><path d="M5 13c3 0 6-2 8-5"/><path d="M13 21l4-9 4 9M14.5 18h5"/>
+                </svg>
+              </div>
+              <h3 data-i18n="sec_language">Language</h3>
+            </div>
+            <div class="set-item">
+              <span class="set-item-label" data-i18n="opt_ui_lang">Interface language</span>
+              <select id="set-uilang" class="set-select">
+                <option value="en">English</option>
+                <option value="uz">O'zbekcha</option>
+                <option value="ru">Русский</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- AI -->
+          <div class="set-card">
+            <div class="set-card-head">
+              <div class="ico">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 2l2 5 5 2-5 2-2 5-2-5-5-2 5-2z"/>
+                </svg>
+              </div>
+              <h3 data-i18n="sec_ai">AI</h3>
+            </div>
+            <div class="set-item">
+              <span class="set-item-label" data-i18n="opt_ai_model">Grammar AI model</span>
+              <select id="set-model" class="set-select"></select>
+            </div>
+            <div class="set-item">
+              <span class="set-item-label">
+                <span data-i18n="opt_ai_temp">Creativity</span>
+                <span class="set-range-val" id="set-temp-val">0.30</span>
+              </span>
+              <input id="set-temp" class="set-range" type="range" min="0" max="1" step="0.05" />
+            </div>
+          </div>
+
+          <!-- Data -->
+          <div class="set-card">
+            <div class="set-card-head">
+              <div class="ico">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14c0 1.7 4 3 9 3s9-1.3 9-3V5"/><path d="M3 12c0 1.7 4 3 9 3s9-1.3 9-3"/>
+                </svg>
+              </div>
+              <h3 data-i18n="sec_data">Data</h3>
+            </div>
+            <div class="set-item">
+              <button id="set-clear-chat" class="set-danger" data-i18n="opt_clear_chat">Clear chat history</button>
+            </div>
+            <div class="set-item">
+              <button id="set-reset" class="set-danger" data-i18n="opt_reset">Reset to defaults</button>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <script type="module" src="assets/js/firebase-init.js"></script>
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/home.js"></script>
+  <script src="assets/js/tools/grammar.js"></script>
+  <script src="assets/js/tools/translator.js"></script>
+  <script src="assets/js/tools/writing.js"></script>
+  <script src="assets/js/tools/settings.js"></script>
+</body>
+</html>

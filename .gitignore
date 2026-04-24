@@ -1,0 +1,7 @@
+# Local runtime config — contains API keys, never commit.
+assets/js/config.js
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+*.log

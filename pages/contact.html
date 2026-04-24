@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#5b6cff" />
+  <title>Contact — Grammino</title>
+  <link rel="stylesheet" href="../assets/css/styles.css" />
+  <style>
+    .form { max-width: 560px; display: flex; flex-direction: column; gap: 14px; }
+    .form label { font-weight: 600; font-size: 14px; }
+    .form input, .form textarea {
+      width: 100%; padding: 12px 14px; border: 1px solid var(--border);
+      border-radius: 10px; font: inherit; outline: none;
+    }
+    .form input:focus, .form textarea:focus {
+      border-color: var(--primary); box-shadow: 0 0 0 4px rgba(91,108,255,.15);
+    }
+    .form textarea { min-height: 140px; resize: vertical; }
+    .form-msg { color: var(--success); font-weight: 600; display: none; }
+    .form-msg.show { display: block; }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav container">
+      <a href="../home.html" class="brand">
+        <span class="brand-mark">G</span>
+        <span class="brand-name">Grammino</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="../home.html#features">Features</a></li>
+        <li><a href="../home.html#editor">Editor</a></li>
+        <li><a href="../home.html#pricing">Pricing</a></li>
+        <li><a href="about.html">About</a></li>
+      </ul>
+      <a href="../login.html" class="btn btn-primary">Sign in</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <h1>Contact us</h1>
+        <p class="lead">Have a question or team inquiry? Drop us a note.</p>
+
+        <form class="form" id="contact-form" novalidate>
+          <div>
+            <label for="name">Name</label>
+            <input id="name" name="name" type="text" required />
+          </div>
+          <div>
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" required />
+          </div>
+          <div>
+            <label for="message">Message</label>
+            <textarea id="message" name="message" required></textarea>
+          </div>
+          <button class="btn btn-primary btn-lg" type="submit">Send message</button>
+          <p class="form-msg" id="form-msg">Thanks — we'll be in touch soon.</p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p class="copyright container">© <span id="year"></span> Grammino. All rights reserved.</p>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+    document.getElementById("contact-form").addEventListener("submit", function (e) {
+      e.preventDefault();
+      const msg = document.getElementById("form-msg");
+      msg.classList.add("show");
+      e.target.reset();
+    });
+  </script>
+</body>
+</html>

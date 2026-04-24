@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#070b1e" />
+  <title>Grammino</title>
+  <link rel="stylesheet" href="assets/css/splash.css" />
+  <link rel="icon" href="assets/img/logo.png" />
+</head>
+<body class="splash-body">
+
+  <!-- Liquid animated background -->
+  <div class="splash-bg" aria-hidden="true">
+    <div class="s-blob s-blob-1"></div>
+    <div class="s-blob s-blob-2"></div>
+    <div class="s-blob s-blob-3"></div>
+    <div class="s-blob s-blob-4"></div>
+  </div>
+
+  <!-- Particles -->
+  <div class="particles" aria-hidden="true">
+    <span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span>
+  </div>
+
+  <main class="splash-stage" id="stage">
+
+    <!-- Logo stack -->
+    <div class="logo-stage">
+      <!-- Expanding rings -->
+      <span class="ring ring-1"></span>
+      <span class="ring ring-2"></span>
+      <span class="ring ring-3"></span>
+
+      <!-- Glow aura -->
+      <span class="aura"></span>
+
+      <!-- Orbiting sparkles -->
+      <span class="orbit orbit-1"><span class="spark"></span></span>
+      <span class="orbit orbit-2"><span class="spark"></span></span>
+      <span class="orbit orbit-3"><span class="spark"></span></span>
+
+      <!-- Logo -->
+      <div class="logo-box">
+        <span class="shine-sweep"></span>
+        <img src="assets/img/logo.png" alt="Grammino" />
+      </div>
+    </div>
+
+    <!-- Wordmark -->
+    <h1 class="wordmark" aria-label="Grammino">
+      <span>G</span><span>r</span><span>a</span><span>m</span><span>m</span><span>i</span><span>n</span><span>o</span>
+    </h1>
+    <p class="tagline">All in one English tools app</p>
+
+    <!-- Loader bar -->
+    <div class="loader" aria-hidden="true"><span></span></div>
+  </main>
+
+  <!-- Reveal mask for page transition -->
+  <div class="reveal" id="reveal" aria-hidden="true"></div>
+
+  <script src="assets/js/splash.js"></script>
+</body>
+</html>

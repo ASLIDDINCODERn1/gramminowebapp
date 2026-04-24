@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#5b6cff" />
+  <title>About — Grammino</title>
+  <link rel="stylesheet" href="../assets/css/styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav container">
+      <a href="../home.html" class="brand">
+        <span class="brand-mark">G</span>
+        <span class="brand-name">Grammino</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="../home.html#features">Features</a></li>
+        <li><a href="../home.html#editor">Editor</a></li>
+        <li><a href="../home.html#pricing">Pricing</a></li>
+        <li><a href="about.html">About</a></li>
+      </ul>
+      <a href="../login.html" class="btn btn-primary">Sign in</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <h1>About Grammino</h1>
+        <p class="lead">
+          Grammino is a lightweight writing assistant built to help anyone
+          communicate clearly — from students drafting essays to teams shipping
+          product docs.
+        </p>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <h2>Our mission</h2>
+        <p>
+          We believe good writing is a superpower. Grammino's goal is to make
+          clear, confident writing accessible to everyone, in any language they
+          work in.
+        </p>
+        <h2 style="margin-top:32px">How it works</h2>
+        <p>
+          The in-browser editor runs entirely on your device — your text never
+          leaves the page. The Pro version adds deeper style and tone analysis
+          powered by our cloud models.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p class="copyright container">© <span id="year"></span> Grammino. All rights reserved.</p>
+  </footer>
+  <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+</body>
+</html>
