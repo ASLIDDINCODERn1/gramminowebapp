@@ -43,14 +43,10 @@ button { font: inherit; cursor: pointer; border: 0; background: transparent; col
   filter: blur(90px);
   opacity: 0.45;
   mix-blend-mode: screen;
-  will-change: transform;
 }
-.blob-1 { background: radial-gradient(circle, #6aa8ff, #1e4bd8 60%, transparent 70%); top: -12%; left: -10%; animation: float1 20s ease-in-out infinite; }
-.blob-2 { background: radial-gradient(circle, #8b5cf6, #3d1fb8 60%, transparent 70%); top: 30%; right: -12%; animation: float2 24s ease-in-out infinite; }
-.blob-3 { background: radial-gradient(circle, #22d3ee, #0e7490 60%, transparent 70%); bottom: -15%; left: 20%; animation: float3 28s ease-in-out infinite; }
-@keyframes float1 { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(80px,60px) scale(1.1); } }
-@keyframes float2 { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(-100px,80px) scale(1.15); } }
-@keyframes float3 { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(60px,-80px) scale(1.2); } }
+.blob-1 { background: radial-gradient(circle, #6aa8ff, #1e4bd8 60%, transparent 70%); top: -12%; left: -10%; }
+.blob-2 { background: radial-gradient(circle, #8b5cf6, #3d1fb8 60%, transparent 70%); top: 30%; right: -12%; }
+.blob-3 { background: radial-gradient(circle, #22d3ee, #0e7490 60%, transparent 70%); bottom: -15%; left: 20%; }
 
 /* Layout grid */
 .layout {
