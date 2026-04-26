@@ -531,6 +531,14 @@ async function finalize() {
     const report = await buildReport();
     renderReport(report);
     showScreen("feedback");
+    if (window.GramminoHistory) {
+      window.GramminoHistory.saveSpeaking(
+        getSelectedTopic()?.name || "Practice",
+        LEVEL_LABELS[state.level] || state.level,
+        report.score,
+        report.grade
+      );
+    }
   } catch (err) {
     sp$("sp-loading-text").textContent = `Could not generate feedback: ${err.message}`;
   }

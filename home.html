@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="assets/css/tools/writing.css" />
   <link rel="stylesheet" href="assets/css/tools/settings.css" />
   <link rel="stylesheet" href="assets/css/tools/speaking.css" />
+  <link rel="stylesheet" href="assets/css/tools/profile.css" />
   <link rel="icon" href="assets/img/logo.png" />
   <!-- Settings applies theme/lang BEFORE first paint -->
   <script src="assets/js/settings.js"></script>
@@ -112,6 +113,29 @@
           <span class="tool-text">
             <span class="tool-name" data-i18n="writing">Writing AI</span>
             <span class="tool-desc" data-i18n="writing_desc">Essays, emails &amp; more</span>
+          </span>
+        </button>
+
+        <button class="tool-link" data-tool="history">
+          <span class="tool-ico ico-history">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="9"/>
+              <path d="M12 7v5l3 3"/>
+            </svg>
+          </span>
+          <span class="tool-text">
+            <span class="tool-name">History</span>
+            <span class="tool-desc">Past sessions</span>
+          </span>
+        </button>
+
+        <button class="tool-link" data-tool="profile">
+          <span class="tool-ico ico-profile" id="sidebar-avatar">
+            <span id="sidebar-avatar-initials">?</span>
+          </span>
+          <span class="tool-text">
+            <span class="tool-name" id="sidebar-username">Profile</span>
+            <span class="tool-desc" id="sidebar-useremail">Account &amp; stats</span>
           </span>
         </button>
 
@@ -559,6 +583,118 @@
         </div>
       </section>
 
+      <!-- History -->
+      <section class="page" data-page="history">
+        <div class="page-head">
+          <div class="page-ico ico-history">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/>
+            </svg>
+          </div>
+          <div>
+            <h2>History</h2>
+            <p>All your grammar checks, writing evaluations and speaking sessions.</p>
+          </div>
+        </div>
+        <div class="page-body hs-wrap">
+
+          <div class="hs-tabs" role="tablist">
+            <button class="hs-tab active" data-filter="all">All</button>
+            <button class="hs-tab" data-filter="grammar">Grammar AI</button>
+            <button class="hs-tab" data-filter="writing">Writing AI</button>
+            <button class="hs-tab" data-filter="speaking">Speaking AI</button>
+          </div>
+
+          <div id="hs-list" class="hs-list"></div>
+
+          <div id="hs-empty" class="hs-empty" hidden>
+            <div class="hs-empty-ico">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/>
+              </svg>
+            </div>
+            <strong>No history yet</strong>
+            <p>Use Grammar AI, Writing AI or Speaking AI and your sessions will appear here.</p>
+          </div>
+
+          <div class="hs-footer">
+            <button id="hs-clear-btn" class="hs-clear-btn" type="button">Clear all history</button>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Profile -->
+      <section class="page" data-page="profile">
+        <div class="page-head">
+          <div class="page-ico ico-profile">
+            <span style="font-size:22px;font-weight:800;">👤</span>
+          </div>
+          <div>
+            <h2>Profile</h2>
+            <p>Your account info and usage stats.</p>
+          </div>
+        </div>
+        <div class="page-body pf-wrap">
+
+          <!-- Hero -->
+          <div class="pf-hero">
+            <div class="pf-avatar" id="pf-avatar">?</div>
+            <div class="pf-hero-info">
+              <div class="pf-name-row">
+                <span class="pf-name" id="pf-name">Loading…</span>
+                <button class="pf-edit-btn" id="pf-edit-btn" type="button">Edit name</button>
+              </div>
+              <div class="pf-email" id="pf-email"></div>
+              <div class="pf-joined" id="pf-joined"></div>
+            </div>
+          </div>
+
+          <!-- Edit name form -->
+          <div class="pf-card pf-edit-card" id="pf-edit-card" hidden>
+            <div class="pf-edit-row">
+              <input id="pf-name-input" class="pf-name-input" type="text" placeholder="Your display name" maxlength="40" />
+              <button id="pf-save-btn" class="pf-save-btn" type="button">Save</button>
+              <button id="pf-cancel-btn" class="pf-cancel-btn" type="button">Cancel</button>
+            </div>
+            <div id="pf-edit-error" class="pf-edit-error"></div>
+          </div>
+
+          <!-- Stats -->
+          <div class="pf-stats">
+            <div class="pf-stat">
+              <span class="pf-stat-value" id="pf-stat-grammar">0</span>
+              <span class="pf-stat-label">Grammar checks</span>
+            </div>
+            <div class="pf-stat">
+              <span class="pf-stat-value" id="pf-stat-writing">0</span>
+              <span class="pf-stat-label">Writing evals</span>
+            </div>
+            <div class="pf-stat">
+              <span class="pf-stat-value" id="pf-stat-speaking">0</span>
+              <span class="pf-stat-label">Speaking sessions</span>
+            </div>
+            <div class="pf-stat">
+              <span class="pf-stat-value" id="pf-stat-days">0</span>
+              <span class="pf-stat-label">Active days</span>
+            </div>
+          </div>
+
+          <!-- Sign out -->
+          <div class="pf-card pf-danger-card">
+            <p class="pf-danger-title">Account</p>
+            <button id="pf-signout-btn" class="pf-signout-btn" type="button">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+                <path d="M16 17l5-5-5-5M21 12H9"/>
+              </svg>
+              Sign out
+            </button>
+          </div>
+
+        </div>
+      </section>
+
       <!-- Settings -->
       <section class="page" data-page="settings">
         <div class="page-head">
@@ -709,5 +845,6 @@
   <script src="assets/js/tools/writing.js"></script>
   <script src="assets/js/tools/settings.js"></script>
   <script src="assets/js/tools/speaking.js"></script>
+  <script src="assets/js/tools/profile.js"></script>
 </body>
 </html>

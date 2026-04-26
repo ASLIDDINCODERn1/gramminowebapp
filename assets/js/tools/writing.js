@@ -282,6 +282,10 @@ Return ONLY the JSON object. No prose. No markdown fences.
       ${tipsHTML}
     `;
     resultsEl.classList.add("show");
+    if (window.GramminoHistory) {
+      const typeName = TASK_DEFAULTS[currentType]?.label || currentType;
+      window.GramminoHistory.saveWriting(overall, typeName, textEl.value.trim().slice(0, 120));
+    }
     // Animate sub-bars from 0 → target by resetting width briefly
     requestAnimationFrame(() => {
       resultsEl.querySelectorAll(".wr-sub-bar span").forEach((el) => {

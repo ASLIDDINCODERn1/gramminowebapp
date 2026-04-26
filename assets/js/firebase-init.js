@@ -79,6 +79,7 @@ window.GramminoAuth = {
     return cred;
   },
   signOut:       () => signOut(auth),
+  updateName:    (name) => updateProfile(auth.currentUser, { displayName: name }),
   friendlyError,
 };
 

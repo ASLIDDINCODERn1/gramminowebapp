@@ -307,6 +307,11 @@ You are here to make the user a better English writer. Teach every time you corr
 
   newBtn.addEventListener("click", () => {
     if (streaming && controller) controller.abort();
+    // Save current session before clearing
+    const userMsgs = history.filter(m => m.role === "user");
+    if (userMsgs.length && window.GramminoHistory) {
+      window.GramminoHistory.saveGrammar(userMsgs[0].content, userMsgs.length);
+    }
     history = [{ role: "system", content: SYSTEM_PROMPT }];
     messagesEl.innerHTML = `
       <div class="chat-empty">
