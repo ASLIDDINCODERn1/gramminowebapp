@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="assets/css/tools/translator.css" />
   <link rel="stylesheet" href="assets/css/tools/writing.css" />
   <link rel="stylesheet" href="assets/css/tools/settings.css" />
+  <link rel="stylesheet" href="assets/css/tools/speaking.css" />
   <link rel="icon" href="assets/img/logo.png" />
   <!-- Settings applies theme/lang BEFORE first paint -->
   <script src="assets/js/settings.js"></script>
@@ -322,13 +323,189 @@
       </section>
 
       <!-- Speaking AI -->
-      <section class="page" data-page="speaking" style="padding:0;overflow:hidden;display:flex;flex-direction:column;">
-        <iframe
-          src="pages/speaking/index.html"
-          allow="microphone; autoplay"
-          style="width:100%;flex:1;border:none;min-height:600px;">
-        </iframe>
+      <section class="page" data-page="speaking">
+        <div class="page-head">
+          <div class="page-ico ico-speaking">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="9" y="3" width="6" height="12" rx="3"/>
+              <path d="M5 11a7 7 0 0 0 14 0"/>
+              <path d="M12 18v3M8 21h8"/>
+            </svg>
+          </div>
+          <div>
+            <h2 data-i18n="speaking">Speaking AI</h2>
+            <p>Practice your spoken English with live AI feedback.</p>
+          </div>
+        </div>
+
+        <div class="page-body sp-wrap">
+
+          <!-- Stepper -->
+          <nav class="sp-stepper" aria-label="Progress">
+            <div class="sp-step active" data-step="setup">
+              <span class="sp-step-num">1</span>
+              <span class="sp-step-label">Setup</span>
+            </div>
+            <div class="sp-step-bar"></div>
+            <div class="sp-step" data-step="practice">
+              <span class="sp-step-num">2</span>
+              <span class="sp-step-label">Practice</span>
+            </div>
+            <div class="sp-step-bar"></div>
+            <div class="sp-step" data-step="feedback">
+              <span class="sp-step-num">3</span>
+              <span class="sp-step-label">Feedback</span>
+            </div>
+          </nav>
+
+          <!-- Setup -->
+          <section id="sp-setup-screen" class="sp-screen active">
+            <div class="sp-card">
+
+              <div class="sp-field">
+                <label class="sp-field-label">Your English Level</label>
+                <div class="sp-pill-group" id="sp-level-group" role="radiogroup">
+                  <button class="sp-pill" data-value="A2">A2</button>
+                  <button class="sp-pill active" data-value="B1">B1</button>
+                  <button class="sp-pill" data-value="B2">B2</button>
+                  <button class="sp-pill" data-value="C1">C1</button>
+                  <button class="sp-pill" data-value="C2">C2</button>
+                </div>
+              </div>
+
+              <div class="sp-field">
+                <label class="sp-field-label">Topic</label>
+                <div class="sp-topic-grid" id="sp-topic-grid"></div>
+              </div>
+
+              <div class="sp-field">
+                <label class="sp-field-label">Number of Questions</label>
+                <div class="sp-pill-group" id="sp-count-group" role="radiogroup">
+                  <button class="sp-pill" data-value="5">5</button>
+                  <button class="sp-pill active" data-value="10">10</button>
+                  <button class="sp-pill" data-value="15">15</button>
+                  <button class="sp-pill" data-value="20">20</button>
+                </div>
+              </div>
+
+              <!-- Voice settings -->
+              <details class="sp-voice-details">
+                <summary>
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M19 5a9 9 0 0 1 0 14"/></svg>
+                  Voice Settings
+                </summary>
+                <div class="sp-voice-body">
+                  <span class="sp-mini-label">Accent</span>
+                  <div class="sp-pill-group" id="sp-accent-filter">
+                    <button class="sp-pill active" data-accent="all">All</button>
+                    <button class="sp-pill" data-accent="en-US">US</button>
+                    <button class="sp-pill" data-accent="en-GB">UK</button>
+                    <button class="sp-pill" data-accent="en-AU">AU</button>
+                    <button class="sp-pill" data-accent="other">Other</button>
+                  </div>
+                  <span class="sp-mini-label">Voice</span>
+                  <select id="sp-voice-select" class="sp-select"></select>
+                  <span class="sp-mini-label">Speed <span id="sp-rate-val">1.00x</span></span>
+                  <div class="sp-rate-row">
+                    <input type="range" id="sp-rate-slider" class="sp-rate-slider" min="0.6" max="1.4" step="0.05" value="1" />
+                  </div>
+                  <button id="sp-preview-voice" class="sp-preview-btn" type="button">Preview voice</button>
+                </div>
+              </details>
+
+              <button id="sp-start-btn" class="tool-cta">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+                Start Speaking Practice
+              </button>
+              <div id="sp-settings-error" class="sp-error"></div>
+
+            </div>
+          </section>
+
+          <!-- Loading -->
+          <section id="sp-loading-screen" class="sp-screen">
+            <div class="sp-card sp-loading-card">
+              <div class="sp-spinner"></div>
+              <p id="sp-loading-text" class="sp-loading-text">Preparing your questions…</p>
+            </div>
+          </section>
+
+          <!-- Practice -->
+          <section id="sp-practice-screen" class="sp-screen">
+            <div class="sp-card">
+
+              <div class="sp-practice-header">
+                <div class="sp-progress-ring" id="sp-progress-ring">
+                  <svg viewBox="0 0 60 60" width="60" height="60">
+                    <circle cx="30" cy="30" r="26" class="sp-ring-track"/>
+                    <circle cx="30" cy="30" r="26" class="sp-ring-fill" id="sp-ring-fill-circle"/>
+                  </svg>
+                  <span id="sp-ring-text" class="sp-ring-text">1/10</span>
+                </div>
+                <div class="sp-meta">
+                  <span class="sp-tag" id="sp-topic-label"></span>
+                  <span class="sp-tag" id="sp-level-label"></span>
+                </div>
+              </div>
+
+              <div class="sp-question-box">
+                <button id="sp-replay-btn" class="sp-replay-btn" type="button" title="Replay question" aria-label="Replay question">
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5zM15.54 8.46a5 5 0 010 7.07M19.07 4.93a10 10 0 010 14.14"/></svg>
+                </button>
+                <p id="sp-question-text" class="sp-question-text"></p>
+              </div>
+
+              <div id="sp-mic-status" class="sp-mic-status">Press the mic to answer.</div>
+              <div id="sp-transcript" class="sp-transcript empty">Your spoken answer will appear here…</div>
+
+              <div class="sp-controls">
+                <button id="sp-redo-btn" class="sp-ghost-btn" type="button" disabled>
+                  <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 4v6h6M23 20v-6h-6"/><path d="M20.49 9A9 9 0 005.64 5.64L1 10M23 14l-4.64 4.36A9 9 0 013.51 15"/></svg>
+                  Redo
+                </button>
+                <button id="sp-mic-btn" class="sp-mic-btn" type="button" title="Record" aria-label="Record answer">
+                  <svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor"><path d="M12 15a3 3 0 003-3V6a3 3 0 10-6 0v6a3 3 0 003 3zm5-3a5 5 0 01-10 0H5a7 7 0 006 6.92V22h2v-3.08A7 7 0 0019 12h-2z"/></svg>
+                </button>
+                <button id="sp-next-btn" class="sp-primary-btn" type="button" disabled>Submit</button>
+              </div>
+
+            </div>
+          </section>
+
+          <!-- Feedback -->
+          <section id="sp-feedback-screen" class="sp-screen">
+            <div class="sp-card">
+
+              <div class="sp-score-hero">
+                <div class="sp-score-ring">
+                  <svg viewBox="0 0 120 120" width="140" height="140">
+                    <circle cx="60" cy="60" r="54" class="sp-ring-track-big"/>
+                    <circle cx="60" cy="60" r="54" class="sp-ring-fill-big" id="sp-score-ring-fill"/>
+                  </svg>
+                  <div class="sp-score-value">
+                    <span id="sp-score-number" class="sp-score-number">0</span>
+                    <span class="sp-score-max">/100</span>
+                  </div>
+                </div>
+                <div id="sp-score-grade" class="sp-score-grade">-</div>
+              </div>
+
+              <p id="sp-feedback-summary" style="font-size:14px;color:var(--text-dim);margin:0;line-height:1.55;"></p>
+
+              <div id="sp-metrics" class="sp-metrics"></div>
+              <div id="sp-feedback-content" class="sp-feedback-content"></div>
+
+              <div class="sp-end-controls">
+                <button id="sp-restart-btn" class="sp-primary-btn" type="button">Practice Again</button>
+                <button id="sp-home-btn" class="sp-ghost-btn" type="button">Change Topic</button>
+              </div>
+
+            </div>
+          </section>
+
+        </div>
       </section>
+      <!-- /Speaking AI -->
 
       <!-- Writing AI — IELTS evaluator -->
       <section class="page" data-page="writing">
@@ -531,5 +708,6 @@
   <script src="assets/js/tools/translator.js"></script>
   <script src="assets/js/tools/writing.js"></script>
   <script src="assets/js/tools/settings.js"></script>
+  <script src="assets/js/tools/speaking.js"></script>
 </body>
 </html>
