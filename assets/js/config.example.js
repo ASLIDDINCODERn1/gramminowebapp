@@ -12,7 +12,7 @@
  *   2) Move Groq calls behind a backend proxy that injects the key server-side.
  */
 window.GRAMMINO_CONFIG = {
-  GROQ_API_KEY: "YOUR_GROQ_API_KEY_HERE",
+  GROQ_API_KEY: "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",
 
   // Non-Llama models on Groq (try others if one is deprecated):
   //   "openai/gpt-oss-20b"     ← default, fast & strong at grammar
