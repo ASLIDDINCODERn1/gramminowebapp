@@ -19,6 +19,6 @@ window.GRAMMINO_CONFIG = {
   //   "openai/gpt-oss-120b"    ← bigger, slower, higher quality
   //   "qwen/qwen3-32b"
   //   "moonshotai/kimi-k2-instruct"
-  GROQ_MODEL: "openai/gpt-oss-20b",
+  GROQ_MODEL: "llama-3.3-70b-versatile",
   GROQ_ENDPOINT: "https://api.groq.com/openai/v1/chat/completions",
 };
