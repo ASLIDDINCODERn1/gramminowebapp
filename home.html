@@ -322,23 +322,12 @@
       </section>
 
       <!-- Speaking AI -->
-      <section class="page" data-page="speaking">
-        <div class="page-head">
-          <div class="page-ico ico-speaking">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="9" y="3" width="6" height="12" rx="3"/>
-              <path d="M5 11a7 7 0 0 0 14 0"/>
-              <path d="M12 18v3M8 21h8"/>
-            </svg>
-          </div>
-          <div>
-            <h2 data-i18n="speaking">Speaking AI</h2>
-            <p>Practice pronunciation with AI feedback.</p>
-          </div>
-        </div>
-        <div class="page-body">
-          <button class="tool-cta big">🎙 Start speaking</button>
-        </div>
+      <section class="page" data-page="speaking" style="padding:0;overflow:hidden;display:flex;flex-direction:column;">
+        <iframe
+          src="pages/speaking/index.html"
+          allow="microphone; autoplay"
+          style="width:100%;flex:1;border:none;min-height:600px;">
+        </iframe>
       </section>
 
       <!-- Writing AI — IELTS evaluator -->
